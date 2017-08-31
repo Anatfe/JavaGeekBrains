@@ -1,4 +1,4 @@
-package Level1.Task.Task2;
+package Level1.Tasks.Task2;
 
 
 public class MainClass {

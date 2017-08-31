@@ -1,4 +1,4 @@
-package Level1.Task.Task4;
+package Level1.Tasks.Task4;
 import java.util.Random;
 import java.util.Scanner;
 
