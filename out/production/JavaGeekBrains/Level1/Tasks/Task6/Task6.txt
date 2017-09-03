@@ -1,0 +1,90 @@
+package Level1.Tasks.Task6.com.geekbrains.animals;
+
+public class Animal {
+    protected String name;
+    protected int limitRun;
+    protected int limitSwimming;
+    protected float limitJump;
+    protected String breed;
+
+    public Animal() {
+        this.name = "unknown";
+        this.breed = "unknown";
+        this.limitRun = 0;
+        this.limitSwimming = 0;
+        this.limitJump = 0;
+    }
+
+    public void printInfo() {
+        System.out.println("Кличка: " + name +
+                " порода: " + breed +
+                " limitRun: " + limitRun +
+                " limitSwimming: " + limitSwimming +
+                " limitJump: " + limitJump);
+    }
+
+    public boolean checkRun(int run) {
+        return run < limitRun;
+    }
+
+    public boolean checkSwimming(int swimming) {
+        return swimming < limitSwimming;
+    }
+
+    public boolean checkJump(float jump) {
+        return jump < limitJump;
+    }
+}
+
+package Level1.Tasks.Task6.com.geekbrains.animals.Home;
+
+import Level1.Tasks.Task6.com.geekbrains.animals.Animal;
+
+public class Dog extends Animal {
+    public Dog(String name, String breed, int run, int swimming, float jump) {
+        this.name = name;
+        this.breed = breed;
+        this.limitRun = run;
+        this.limitSwimming = swimming;
+        this.limitJump = jump;
+    }
+}
+
+package Level1.Tasks.Task6.com.geekbrains.animals.Home;
+
+import Level1.Tasks.Task6.com.geekbrains.animals.Animal;
+
+public class Cat extends Animal {
+    public Cat(String name, String breed, int run, float jump) {
+        this.name = name;
+        this.breed = breed;
+        this.limitRun = run;
+        this.limitJump = jump;
+    }
+}
+
+package Level1.Tasks.Task6;
+
+import Level1.Tasks.Task6.com.geekbrains.animals.Animal;
+import Level1.Tasks.Task6.com.geekbrains.animals.Home.Dog;
+import Level1.Tasks.Task6.com.geekbrains.animals.Home.Cat;
+
+public class MainClass {
+    public static void main(String[] args) {
+        Animal[] arrayAnimals = new Animal[4];
+        arrayAnimals[0] = new Dog("Мухтар", "Немецкая овчарка", 2000, 1000, 1f);
+        arrayAnimals[1] = new Dog("Шарик", "Лайка", 1000, 500, 0.8f);
+        arrayAnimals[2] = new Cat("Васька", "Беспородный", 1100, 2f);
+        arrayAnimals[3] = new Cat("Принцесса", "Сиамская", 600, 1.3f);
+
+        for (Animal animals :arrayAnimals) {
+            animals.printInfo();
+            System.out.println("Животное сможет пробежать 1 км: " + animals.checkRun(1000));
+            System.out.println("Животное сможет проплыть 800 м: " + animals.checkSwimming(800));
+            System.out.println("Животное сможет подпрыгнуть 0.9 м: " + animals.checkJump(0.9f));
+            System.out.println("-------------------------------------");
+        }
+
+    }
+}
+
