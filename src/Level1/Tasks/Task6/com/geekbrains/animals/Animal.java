@@ -1,6 +1,6 @@
 package Level1.Tasks.Task6.com.geekbrains.animals;
 
-public class Animal {
+public abstract class Animal {
     protected String name;
     protected int limitRun;
     protected int limitSwimming;
