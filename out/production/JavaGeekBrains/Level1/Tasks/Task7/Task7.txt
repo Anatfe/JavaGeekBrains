@@ -1,0 +1,133 @@
+package Level1.Tasks.Task7;
+
+import Level1.Tasks.Task7.pet.Cat;
+import Level1.Tasks.Task7.utensil.Plate;
+
+import java.util.ArrayList;
+
+public class MainClass {
+
+    public static void main(String[] args) {
+        Plate plate = new Plate((int)(Math.random()*10)+10);
+        System.out.println("Еды в тарелке: "+plate.getFood());
+
+        ArrayList<Cat> arrCats = new ArrayList();
+        initializationCat(5, arrCats);
+
+        System.out.println("Состояние котов:");
+        Cat.printCatsInfo(arrCats);
+
+        Cat.feedCats(arrCats, plate);
+        System.out.println("Состояние котов после кормежки:");
+        Cat.printCatsInfo(arrCats);
+
+        Cat.expelFullCats(arrCats);
+        System.out.println("Оставшиеся коты:");
+        Cat.printCatsInfo(arrCats);
+
+        plate.addFood(10);
+        System.out.println("Еды в тарелке: "+plate.getFood());
+
+
+    }
+    public static void initializationCat(int cats, ArrayList arrCats) {
+        for (int i = 0; i < cats; i++) {
+            arrCats.add(new Cat("Васька "+(i+1), (int)((Math.random()*10)+1)));
+        }
+    }
+
+}
+package Level1.Tasks.Task7.utensil;
+
+import Level1.Tasks.Task7.pet.Cat;
+
+public class Plate {
+    private int food;
+    private int maxFood;
+
+    public Plate(int food) {
+        this.food    = food;
+        this.maxFood = food;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public void addFood(int food) {
+        if (maxFood > this.food + food){
+            this.food = maxFood;
+        } else this.food += food;
+    }
+
+    public void decreaseFood(Cat cat) {
+        food -= cat.getAppetite();
+    }
+
+}
+package Level1.Tasks.Task7.pet;
+
+import Level1.Tasks.Task7.utensil.Plate;
+
+import java.util.ArrayList;
+
+public class Cat {
+    private String name;
+    private int appetite;
+    private boolean hungry;
+
+    public Cat(String name, int appetite) {
+        this.name = name;
+        this.appetite = appetite;
+        this.hungry = true;
+    }
+
+    public void eat(Plate plate) {
+        if (appetite > plate.getFood()) {
+            System.out.println("Коту: " + name + " не хватило еды! Аларм, кот голодный. Хотя отбой, я люблю собак!");
+            hungry = true;
+            return;
+        }
+        plate.decreaseFood(this);
+        hungry = false;
+    }
+
+    public int getAppetite() {
+        return appetite;
+    }
+
+    public static void printCatsInfo(ArrayList<Cat> arrCats) {
+        for (Cat cat : arrCats) {
+            System.out.println("Кот: " + cat.name +
+                    ", аппетит: " + cat.appetite + ", " + cat.itHungryString());
+        }
+        System.out.println("---------------------------------");
+    }
+
+    public static void feedCats(ArrayList<Cat> arrCats, Plate plate) {
+        for (Cat cat : arrCats) {
+            if (!cat.hungry) continue;
+            cat.eat(plate);
+        }
+
+    }
+
+    public String itHungryString() {
+        if (hungry) return "голодный";
+        else return "сытый";
+    }
+
+    public static void expelFullCats(ArrayList<Cat> arrCats) {
+        Cat cat;
+        for (int i = 0; i < arrCats.size();) {
+            cat = arrCats.get(i);
+            if (cat.hungry) {
+                i++;
+                continue;
+            }
+            System.out.println("Выгоняем сытого кота: "+cat.name);
+            arrCats.remove(i);
+        }
+
+    }
+}

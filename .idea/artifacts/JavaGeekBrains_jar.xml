@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="JavaGeekBrains:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaGeekBrains_jar</output-path>
+    <root id="archive" name="JavaGeekBrains.jar">
+      <element id="module-output" name="JavaGeekBrains" />
+    </root>
+  </artifact>
+</component>
